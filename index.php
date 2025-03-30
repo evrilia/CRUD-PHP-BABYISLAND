@@ -33,6 +33,7 @@ if (isset($_POST['id_produk'])) {
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,6 +41,7 @@ if (isset($_POST['id_produk'])) {
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <h2>Form Sewa Perlengkapan Bayi</h2>
@@ -103,20 +105,23 @@ if (isset($_POST['id_produk'])) {
 
             <div class="button-container">
                 <button type="submit">Sewa</button>
+                <button type="button" onclick="window.location.href='read.php'">Tampilkan Data</button>
             </div>
         </form>
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Mengambil produk berdasarkan category yang dipilih
-            $("#id_category").change(function () {
+            $("#id_category").change(function() {
                 var id_category = $(this).val();
                 $.ajax({
                     type: "POST",
                     url: "index.php",
-                    data: { id_category: id_category },
-                    success: function (response) {
+                    data: {
+                        id_category: id_category
+                    },
+                    success: function(response) {
                         $("#id_produk").html(response);
                         $("#harga_per_hari").val(""); // Reset harga
                         $("#total_price").val(""); // Reset total harga
@@ -125,13 +130,15 @@ if (isset($_POST['id_produk'])) {
             });
 
             // Mengambil harga per hari dari database berdasarkan produk yang dipilih
-            $("#id_produk").change(function () {
+            $("#id_produk").change(function() {
                 var id_produk = $(this).val();
                 $.ajax({
                     type: "POST",
                     url: "index.php",
-                    data: { id_produk: id_produk },
-                    success: function (response) {
+                    data: {
+                        id_produk: id_produk
+                    },
+                    success: function(response) {
                         $("#harga_per_hari").val(response);
                         hitungTotalHarga();
                     }
@@ -139,7 +146,7 @@ if (isset($_POST['id_produk'])) {
             });
 
             // Hitung total harga berdasarkan tanggal
-            $("#time, #time_return").change(function () {
+            $("#time, #time_return").change(function() {
                 hitungTotalHarga();
             });
 
@@ -159,4 +166,5 @@ if (isset($_POST['id_produk'])) {
         });
     </script>
 </body>
+
 </html>
